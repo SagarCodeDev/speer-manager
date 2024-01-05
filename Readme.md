@@ -52,7 +52,10 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
     POST /speer-assessment/v1/api/auth/login
     ```
 
-3. Perform CRUD operations using the obtained token.
+3. Perform CRUD operations using the obtained token by using the token as a Bearer token.
+   Sample curl for getting the Notes:
+   curl --location 'http://localhost:8085/speer-assessment/v1/notes/v1/api/notes' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlNzE0YzU0OS0zOGU3LTQ1MGQtYThlMy05MDMwM2E3Zjc1NDgiLCJpYXQiOjE3MDQ0NjcyOTEsImV4cCI6MTcwNDQ3MDg5MX0._zx2iQaYv0hwlLIWZLtqXTTcZ91PcGgJ1tvTeTqu9bo'
 
 ## Project Structure
 

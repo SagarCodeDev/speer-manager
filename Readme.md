@@ -36,9 +36,7 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
 
 3. Run the application:
 
-    ```bash
-    ./gradlew run
-    ```
+   Go to Main.kt file, add base.xml as program argument and run it
 
 ## Usage
 
@@ -58,10 +56,13 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
 
 ## Project Structure
 
-- **src/main/java/resources**: Configuration files, including `base.xml` with IP, port, rate limit, DB, collection, etc.
+- **src/main/java/resources**:API endpoint controllers.
 - **src/main/java/services**: Business logic for the application.
 - **src/main/java/repositories**: Database interaction logic.
-- **src/main/java/controllers**: API endpoint controllers.
+-  Configuration files,  `base.xml` with IP, port, rate limit, DB name, collection name, etc.
+-  build.gradle contains all the project dependencies
+-  **di/** directory contains all the files used for dependency injection
+-  Main.kt is the the start file.
 
 ## Configuration
 
@@ -89,3 +90,10 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
 - Redis (Session Management)
 - JWT (Authentication)
 - Bcrypt (Password Hashing)
+
+  ## Software requirements to run the project
+- JDK 17
+- Mongo Server(on port 271017 by default)
+- Redis server(on port 6379 by default)
+- Gradle 8.0
+- IntelliJ

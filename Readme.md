@@ -11,6 +11,7 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
 - [Configuration](#configuration)
 - [API Endpoints](#api-endpoints)
 - [Dependencies](#dependencies)
+- [Postman collection json](#json)
 
 ## Features
 
@@ -100,3 +101,132 @@ Welcome to the Speer Assessment Project! This project is built using Kotlin, Jav
 - Redis server(on port 6379 by default)
 - Gradle 8.0
 - IntelliJ
+
+  ## POSTMAN JSON
+ ```bash
+  {
+	"info": {
+		"_postman_id": "ad8992c0-16f6-48bb-80d0-fc54b191abfc",
+		"name": "speer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26942106",
+		"_collection_link": "https://galactic-water-70629.postman.co/workspace/New-Team-Workspace~01f622ea-4c1e-4a79-ac40-785b292c49bb/collection/26942106-ad8992c0-16f6-48bb-80d0-fc54b191abfc?action=share&source=collection_link&creator=26942106"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Sagar\",\r\n    \"lastName\": \"Sheoran\",\r\n    \"emailId\": \"sagarsheoran79@gmail.com\",\r\n    \"password\": \"pass123\",\r\n    \"dob\": 170000100,\r\n    \"contactNumber\": \"7727839857\",\r\n    \"country\": \"India\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/speer-assessment/v1/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"speer-assessment",
+						"v1",
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get notes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3NjQ0YzA3Yi1hYTBlLTQ4M2UtYWY1MS0yOGQ0YWE1ZjdhNjUiLCJpYXQiOjE3MDQ0NTczNjksImV4cCI6MTcwNDQ2MDk2OX0._d92wBG8P7JSAbWJVJ0kBvxGjzRg-a6sgg5M-gvnue8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/speer-assessment/v1/notes/v1/api/notes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"speer-assessment",
+						"v1",
+						"notes",
+						"v1",
+						"api",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"sagarsheoran79@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/speer-assessment/v1/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"speer-assessment",
+						"v1",
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post notes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Share Notes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
+ ```

@@ -10,6 +10,7 @@ import exceptions.UnAuthorizedException
 import models.AuthenticateRequest
 import models.User
 import org.bson.conversions.Bson
+import org.mindrot.jbcrypt.BCrypt
 import repositories.UserRepository
 import utils.USER_NOT_EXIST
 import java.util.UUID
@@ -84,6 +85,7 @@ class UserService @Inject constructor(
     private fun User.ensure(){
         this.uuid = UUID.randomUUID().toString()
         this.createTime = System.currentTimeMillis()
+        this.password = BCrypt.hashpw(this.password, BCrypt.gensalt())
     }
 
     fun authenticateUser(request: String): String{
@@ -91,7 +93,8 @@ class UserService @Inject constructor(
             val reqObj = gson.fromJson(request, AuthenticateRequest::class.java)
             val filter = Filters.eq("emailId", reqObj.email)
             val users = userRepository.getUsersByFilter(filter)
-            if(users.first().password != reqObj.password){
+            val passMatches = BCrypt.checkpw(reqObj.password, users.first().password)
+            if(passMatches.not()){
                 throw UnAuthorizedException("Invalid Password")
             }
             val token =  jwtService.createToken(userId = users.first().uuid!!)

@@ -62,7 +62,7 @@ class UserResource @Inject constructor(
         if(userId != tokenUserId){
             throw UnAuthorizedException(INVALID_USER)
         }
-        jwtService.deleteToken(token)
+        jwtService.deleteToken(userId)
         return Response.ok("OK").toString()
     }
 

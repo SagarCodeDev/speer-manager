@@ -12,4 +12,6 @@
     <entry key="jwt.signature.key">abcabc</entry>
     <entry key="speer.manager.redis.host">localhost</entry>
     <entry key="speer.manager.redis.port">6379</entry>
+    <entry key="expiry.time">3600000</entry>
+    <entry key="rate.limit">100</entry>
 </properties>

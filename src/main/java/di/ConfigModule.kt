@@ -73,4 +73,16 @@ open class ConfigModule {
     fun provideNotesCollectionName(): String{
         return Config.getConfigs(NOTES_COLLECTION_NAME)
     }
+
+    @Provides
+    @Named(EXPIRY_TIME)
+    fun provideExpiryTime(): Long{
+        return Config.getConfigs(EXPIRY_TIME).toLong()
+    }
+
+    @Provides
+    @Named(RATE_LIMIT)
+    fun provideRateLimit(): Long{
+        return Config.getConfigs(RATE_LIMIT).toLong()
+    }
 }

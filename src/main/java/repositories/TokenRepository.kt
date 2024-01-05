@@ -1,16 +1,20 @@
 package repositories
 
+import com.google.gson.Gson
 import exceptions.DatabaseException
 import io.lettuce.core.api.StatefulRedisConnection
+import models.Session
 import javax.inject.Inject
 
 class TokenRepository @Inject constructor(
-    private val redisConnection: StatefulRedisConnection<String,String>
+    private val redisConnection: StatefulRedisConnection<String,String>,
+    private val gson: Gson
 ) {
 
-    fun getRateLimit(token: String): Int{
+    fun getSession(userId: String): Session{
         try{
-            return redisConnection.sync().get(token)?.toInt() ?: 0
+            val sesObj =  redisConnection.sync().get(userId)
+            return gson.fromJson(sesObj, Session::class.java)
         }catch (e: Exception){
             e.printStackTrace()
             println(e.message)
@@ -18,9 +22,9 @@ class TokenRepository @Inject constructor(
         }
     }
 
-    fun setRateLimit(token: String, count: Int){
+    fun saveSession(userId: String, session: String){
         try{
-            redisConnection.sync().set(token, count.toString())
+            redisConnection.sync().set(userId, session)
         }catch (e: Exception){
             e.printStackTrace()
             println(e.message)
@@ -28,9 +32,9 @@ class TokenRepository @Inject constructor(
         }
     }
 
-    fun deleteToken(token: String){
+    fun deleteSession(userId: String){
         try{
-            redisConnection.sync().del(token)
+            redisConnection.sync().del(userId)
         }catch (e: Exception){
             e.printStackTrace()
             println(e.message)

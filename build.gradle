@@ -65,7 +65,8 @@ dependencies {
     api "org.glassfish.jaxb:jaxb-runtime:2.3.2"
     api group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
     api "javax.activation:javax.activation-api:1.2.0"
-    api('org.glassfish.jaxb:jaxb-runtime:2.3.0')
+    api 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
+    implementation "org.mindrot:jbcrypt:0.4"
 }
 
 tasks.register('fatJar', Jar) {

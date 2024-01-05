@@ -1,0 +1,18 @@
+package utils
+
+const val BASE_PATH = "speer-assessment/v1"
+const val SPEER_DB_NAME = "speer.manager.db.name"
+const val USER_COLLECTION_NAME = "user.collection.name"
+const val NOTES_COLLECTION_NAME = "notes.collection.name"
+const val SPEER_MANAGER_IP = "speer.manager.ip"
+const val SPEER_MANAGER_PORT = "speer.manager.port"
+const val SPEER_MANAGER_DB_HOST = "speer.manager.db.host"
+const val SPEER_MANAGER_DB_PORT = "speer.manager.db.port"
+const val SPEER_MANAGER_REDIS_HOST = "speer.manager.redis.host"
+const val SPEER_MANAGER_REDIS_PORT = "speer.manager.redis.port"
+const val TOKEN_NOT_VALID = "Token Not Valid"
+const val INVALID_USER = "Invalid User"
+const val USER_NOT_EXIST = "User Not Exist"
+const val TRACE_ID = "traceId"
+const val UNAUTHORIZED = "Unauthorized"
+const val JWT_SIGNATURE_KEY = "jwt.signature.key"

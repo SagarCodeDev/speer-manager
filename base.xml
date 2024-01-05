@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+<properties>
+    <entry key="speer.manager.ip">localhost</entry>
+    <entry key="speer.manager.port">8080</entry>
+    <entry key="speer.manager.db.host">localhost</entry>
+    <entry key="speer.manager.db.port">3017</entry>
+    <entry key="speer.manager.db.name">speerDB</entry>
+    <entry key="user.collection.name">users</entry>
+    <entry key="notes.collection.name">notes</entry>
+    <entry key="jwt.signature.key">abcabc</entry>
+    <entry key="speer.manager.redis.host">localhost</entry>
+    <entry key="speer.manager.redis.port">6379</entry>
+</properties>

@@ -103,7 +103,7 @@ class UserService @Inject constructor(
     }
 
     fun verifyUserId(userId: String){
-        val filter = Filters.eq("userId", userId)
+        val filter = Filters.eq("_id", userId)
         val users = userRepository.getUsersByFilter(filter)
         if(users.isEmpty()){
             throw UnAuthorizedException(USER_NOT_EXIST)

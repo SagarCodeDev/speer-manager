@@ -8,6 +8,7 @@ import exceptions.NotAllowedException
 import exceptions.ResourceUnavailableException
 import models.Notes
 import org.bson.conversions.Bson
+import org.json.JSONArray
 import org.json.JSONObject
 import repositories.NotesRepository
 import java.util.UUID
@@ -21,7 +22,7 @@ class NotesService @Inject constructor(
         try{
             val notes = gson.fromJson(request, Notes::class.java)
             validateOrThrow(notes)
-            notes.ensureFields()
+            notes.ensureFields(userId)
             notesRepository.createNotes(notes)
             return notes
         }catch (e: Exception){
@@ -53,9 +54,10 @@ class NotesService @Inject constructor(
         }
     }
 
-    private fun Notes.ensureFields(){
+    private fun Notes.ensureFields(userId: String){
         this.uuid = UUID.randomUUID().toString()
         this.createTime = System.currentTimeMillis()
+        this.userId = userId
     }
 
     fun getNotes(filters: String?, search: String?, projections: List<String>, limit: Int, offset: Int, userId: String): List<Notes> {
@@ -99,9 +101,16 @@ class NotesService @Inject constructor(
 
         if(search.isNullOrBlank().not()){
             val text = search!!.replace("(","\\\\(").replace(")","\\\\)")
-            val searchTitleQuery = BasicDBObject.parse("{\"title\":{\"\$regex\":\"$text\",\"options\":'i'")
-            val searchNoteQuery = BasicDBObject.parse("{\"note\":{\"\$regex\":\"$text\",\"options\":'i'")
-            query.addAll(listOf(searchTitleQuery, searchNoteQuery))
+            val searchTitleQuery = BasicDBObject.parse("{\"title\":{\"\$regex\":\"$text\",\"\$options\":'i'}}")
+            val searchNoteQuery = BasicDBObject.parse("{\"note\":{\"\$regex\":\"$text\",\"\$options\":'i'}}")
+            val searchFilter = BasicDBList()
+            searchFilter.add(searchNoteQuery)
+            searchFilter.add(searchTitleQuery)
+            query.add(
+                BasicDBObject(
+                    "\$or", searchFilter
+                )
+            )
         }
 
         return BasicDBObject("\$and", query)
@@ -156,6 +165,19 @@ class NotesService @Inject constructor(
         }catch (e:Exception){
             e.printStackTrace()
             println(e.message)
+            throw e
+        }
+    }
+
+    fun shareNoteWithUsers(id: String, userIds: List<String>, userId: String): Notes {
+        try{
+            val note = getNoteById(id, userId)
+            note.sharedUsers.toMutableList().addAll(userIds)
+            note.sharedUsers.distinct()
+            return notesRepository.updateNotes(note)
+        }catch (e: Exception){
+            e.printStackTrace()
+            e.message
             throw e
         }
     }

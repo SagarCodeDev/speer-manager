@@ -19,7 +19,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Singleton
-@Path("$BASE_PATH/api/auth")
+@Path("/$BASE_PATH/api/auth")
 class UserResource @Inject constructor(
     private val userService: UserService,
     private val jwtService: JWTService

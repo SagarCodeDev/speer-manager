@@ -10,14 +10,13 @@ import javax.ws.rs.ext.Provider
 @Provider
 class CORSFilter @Inject constructor(): ContainerResponseFilter, ContainerRequestFilter {
     override fun filter(requestContext: ContainerRequestContext) {
-        TODO("Not yet implemented")
     }
 
     override fun filter(requestContext: ContainerRequestContext, responseContext: ContainerResponseContext) {
         responseContext.headers.add("Access-Control-Allow-Origin", "*")
         responseContext.headers.add(
-            "Access-Control-Allow-Credentials",
-            "origin, content-type, accept, authorization, access-control-allow-methods, access-control-allow-origin"
+            "Access-Control-Allow-Headers",
+            "origin, content-type, accept, authorization, access-control-allow-methods, access-control-allow-origin,traceID"
         )
         responseContext.headers.add("Access-Control-Allow-Credentials", "true")
         responseContext.headers.add(

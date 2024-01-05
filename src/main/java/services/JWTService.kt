@@ -29,9 +29,9 @@ class JWTService @Inject constructor(
 
     fun parseTokenAndGetUser(token: String): String{
         try {
-            val claims = Jwts.parser().setSigningKey(key).parseClaimsJwt(token).body
+            val claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).body
             val expTime = claims.expiration.time
-            if (expTime > System.currentTimeMillis()) {
+            if (expTime < System.currentTimeMillis()) {
                 tokenRepository.deleteToken(token)
                 throw UnAuthorizedException("Token has expired")
             }

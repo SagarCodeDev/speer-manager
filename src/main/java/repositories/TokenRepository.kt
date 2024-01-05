@@ -10,7 +10,7 @@ class TokenRepository @Inject constructor(
 
     fun getRateLimit(token: String): Int{
         try{
-            return redisConnection.sync().get(token).toInt()
+            return redisConnection.sync().get(token)?.toInt() ?: 0
         }catch (e: Exception){
             e.printStackTrace()
             println(e.message)

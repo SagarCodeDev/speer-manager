@@ -24,7 +24,7 @@ class NotesResource @Inject constructor(
     @Consumes(MediaType.APPLICATION_JSON)
     @Throws(Exception::class)
     fun saveNotes(
-        @HeaderParam("Authentication") authorization: String?,
+        @HeaderParam("Authorization") authorization: String?,
         request: String
     ): String{
         //Authenticate user
@@ -108,6 +108,23 @@ class NotesResource @Inject constructor(
         val userId = userService.parseTokenAndGetUser(token)
         userService.verifyUserId(userId)
         val response = notesService.deleteNote(id, userId)
+        return Response.ok(response).toString()
+    }
+
+    @POST
+    @Path("/notes/{id}/share")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Throws(Exception::class)
+    fun shareNoteWithUsers(
+        @HeaderParam("Authorization") authorization: String?,
+        @PathParam("id") id: String,
+        @QueryParam("userIds") userIds: String
+    ): String{
+        val token = authorization?.split(" ")?.get(1) ?: throw UnAuthorizedException(TOKEN_NOT_VALID)
+        val userId = userService.parseTokenAndGetUser(token)
+        userService.verifyUserId(userId)
+        val response = notesService.shareNoteWithUsers(id, userIds.split(","), userId)
         return Response.ok(response).toString()
     }
 }

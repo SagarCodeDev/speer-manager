@@ -21,7 +21,7 @@ open class HttpModule {
 
     @Provides
     @Singleton
-    fun provideRestApplication(
+    fun provideRestApplicationBootstrap(
         userResource: UserResource,
         notesResource: NotesResource
     ): ResourceConfig{
